@@ -40,6 +40,8 @@ let () =
   (* Rewrite the graph that has been read. *)
   (*let () = write_file outfile graph in *)
 
+
+  
   (* Test de l'algroithme de FordFulkerson *)
   let graph1 = gmap graph int_of_string in
 
