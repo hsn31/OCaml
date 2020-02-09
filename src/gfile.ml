@@ -100,3 +100,34 @@ let from_file path =
   final_graph
 
 (* function export which writes a string graph in dot format *)
+
+let export name graph =
+  (*http://web4.ensiie.fr/~dubois/IAP1/PROJETS/impression_fichiers.pdf *)
+
+  (* On ouvre un fichier pour y écrire -out- *)
+  let file = open_out name in
+
+  (*on crée une fonction intermédiaire pour écrire une ligne : *)
+  let new_line id1 id2 lbl =
+
+    fprintf file "\t%d -> %d [ label = \"%s\" ]; \n" id1 id2 lbl;
+    ()
+  in
+
+  (*On écrit dans ce fichier *)
+
+  (*https://www.tonyballantyne.com/graphs.html *)
+  
+  fprintf file "digraph finite_state_machine {\n" ;
+
+  fprintf file "\trankdir=LR; \n\tsize=\"8,5\"\n";
+
+  fprintf file "\tnode [shape = circle]; \n";
+
+  e_iter graph (new_line);
+
+  fprintf file "}\n";
+
+  close_out file ;
+  ()
+  ;;

@@ -1,7 +1,9 @@
+open Graph
+
 (*
 * Déroulé de l'Algorithme
 * 
-* Trouver un chemin qui augmente le flot max.
+* Trouver un chemin qui augmente le flot max.(0(E))
 * Trouver sur le chemin concerné le flot max (compute the bottleneck capacity : calculer la capacité du goulot d'étranglement)
 * Mettre à jour les labels des arcs concernés + le flot max
 * 
@@ -12,4 +14,6 @@
 * 
 * 
 *)
+
+
 
