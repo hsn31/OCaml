@@ -1,13 +1,9 @@
-Base project for Ocaml project on Ford-Fulkerson. This project contains some simple configuration files to facilitate editing Ocaml in VSCode.
+Ocaml project on Ford-Fulkerson, INSA Toulouse, 4IR, 2019-2020, S1. 
 
-To use, you should install the *OCaml* extension in VSCode. Other extensions might work as well but make sure there is only one installed.
-Then open VSCode in the root directory of this repository.
-
-Features :
- - full compilation as VSCode build task (Ctrl+Shift+b)
- - highlights of compilation errors as you type
- - code completion
- - automatic indentation on file save
+How to test if it works ? :
+ - ./ftest.native graphs/graph1 0 5 graphs/ff_graph1 puis dot -Tsvg graphs/ff_graph1.dot > graphs/ff_graph1.svg
+ - ./ftest.native graphs/graph2 0 3 graphs/ff_graph2 puis dot -Tsvg graphs/ff_graph2.dot > graphs/ff_graph2.svg
+ - To generate an image from a dot file, you can use : dot -Tsvg your-dot-file > some-output-file.svg
 
 
 A makefile also provides basic automation :
