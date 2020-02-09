@@ -109,8 +109,9 @@ let export name graph =
 
   (*on crée une fonction intermédiaire pour écrire une ligne : *)
   let new_line id1 id2 lbl =
-
-    fprintf file "\t%d -> %d [ label = \"%s\" ]; \n" id1 id2 lbl;
+   
+   (* https://graphviz.gitlab.io/_pages/Gallery/directed/fsm.gv.txt *)
+   fprintf writefile "\tLR_%i -> LR_%i [ label = \"%s\" ]; \n" id1 id2 v_str;
     ()
   in
 
