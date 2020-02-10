@@ -18,27 +18,30 @@ open Printf
 *)
 
 type path = id list
-
+type graphe = int graph
 
 (*Trouver le flot max possible pour incrémenter le path - autrement dit la capacité minimale *)
 let rec capamax graph origin acum = function
   | [] -> acum
   | id :: rest -> 
+
     let lbl = find_arc graph origin id in
     match lbl with
-    | Some l -> capamax graph id (min acum l) rest
-    | _ -> failwith "Erreur dans le graph (capamax de fordfulkerson.ml)"
+      | None -> 0
+      | Some l -> capamax graph id (min acum l) rest
+
 
 
 (*Appliquer ce flot à l'ensemble du path*)
-let rec apply graph flot id1 path = match path with 
-  | [] -> graph
-  | id::rest ->  
+let rec apply graph flot id1 path = 
+  match path with 
+    | [] -> graph
+    | id::rest ->  
 
-    let new_graph1 = add_arc graph id1 id (-flot) in 
-    let new_graph2 = add_arc new_graph1 id id1 flot in
+      let new_graph1 = add_arc graph id1 id (-flot) in 
+      let new_graph2 = add_arc new_graph1 id id1 flot in
 
-    apply new_graph2 flot id (rest) 
+      apply new_graph2 flot id (rest) 
 
 ;;
 
@@ -70,33 +73,39 @@ let rec find_path graph list id1 id2 =
 
   loop (out_arcs graph id1)
 
-(* A Vérifier *)
-let get_inflow gr idend =
+
+let get_max graph id =
   let rec sum_arc  = function
     |[] -> 0
-    |(_,lbl)::b -> lbl + sum_arc b
+    |(_,lbl)::rest -> lbl + sum_arc rest
   in 
-  let my_arc = out_arcs gr idend in sum_arc my_arc
+  let my_arc = out_arcs graph id in sum_arc my_arc
 ;;
 
 (* Corps de  ALgorithme de Ford_Fulkerson *)
 
 (*Le plus simple est de créer une fonction intermédiaire permettant de 1- Trouver la capacité max, 2- de mettre à jour les flots *)
 (*12 pour iter  *)
+
 let iter graph12 id1 path12 =
   (*capamax graph origin acum path *)
-  let max=0 in
-  let f = capamax graph12 id1 max path12 in
+
+  (* # Int32.max_int;;
+- : int32 = 2147483647l *)
+  let _ = Printf.printf "Ford_Fulkerson iter \n%!" in
+  let f = capamax graph12 id1 max_int path12 in
+  
   apply graph12 f id1 path12
-
 ;;
-
 
 
 (*fordfulkerson revient ainsi à appeler plusieurs fois iter *)
 let rec ford_fulkerson graph id1 id2= 
 
+  let _ = Printf.printf "Ford_Fulkerson \n%!" in
+
   match find_path graph [] id1 id2 with 
-  |None -> Printf.printf "Flow max du graphe : %d \n%!" (get_inflow graph id2); graph
-  |Some x -> ford_fulkerson (iter graph id1 x) id1 id2
+  |None -> Printf.printf "Flow max du graphe : %d \n%!" (get_max graph id2); graph
+  |Some x -> ford_fulkerson (iter graph id1 x) id1 id2 ;
+
 ;;

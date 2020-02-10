@@ -107,11 +107,14 @@ let export name graph =
   (* On ouvre un fichier pour y écrire -out- *)
   let file = open_out name in
 
+  let _ = Printf.printf "export gfile.ml \n%!" in
+
   (*on crée une fonction intermédiaire pour écrire une ligne : *)
   let new_line id1 id2 lbl =
 
     (* https://graphviz.gitlab.io/_pages/Gallery/directed/fsm.gv.txt *)
     fprintf file "\tLR_%i -> LR_%i [ label = \"%s\" ]; \n" id1 id2 lbl;
+    Printf.printf "export gfile.ml text: \tLR_%i -> LR_%i [ label = \"%s\" ]; \n" id1 id2 lbl ;
     ()
   in
 
@@ -129,6 +132,8 @@ let export name graph =
   e_iter graph (fun id1 id2 lbl -> new_line id1 id2 lbl);
 
   fprintf file "}\n";
+
+  
 
   close_out file ;
   ()

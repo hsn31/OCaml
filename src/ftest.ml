@@ -30,8 +30,8 @@ let () =
   and outfile = Sys.argv.(4)
 
   (* These command-line arguments are not used for the moment. *)
-  and _source = int_of_string Sys.argv.(2)
-  and _sink = int_of_string Sys.argv.(3)
+  and source = int_of_string Sys.argv.(2)
+  and sink = int_of_string Sys.argv.(3)
   in
 
   (* Open file *)
@@ -40,12 +40,12 @@ let () =
   (* Rewrite the graph that has been read. *)
   (*let () = write_file outfile graph in *)
 
-
+  let _ = Printf.printf "ftest à l'intérieur \n%!" in
 
   (* Test de l'algroithme de FordFulkerson *)
   let graph1 = gmap graph int_of_string in
 
-  let fordfulkerson = ford_fulkerson graph1 _source _sink in 
+  let fordfulkerson = ford_fulkerson graph1 source sink in 
 
   let gstring = gmap fordfulkerson string_of_int in
 

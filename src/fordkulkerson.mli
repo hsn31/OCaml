@@ -2,15 +2,16 @@ open Graph
 
 (* path = liste de différents noeuds *)
 type path = id list
+type graphe = int graph
 
-val find_path : int graph -> id list -> id -> id -> path option
+val find_path : graphe -> id list -> id -> id -> path option
 
-val apply : int graph -> int -> id -> path -> int graph
+val apply : graphe -> int -> id -> path -> graphe
 
-val capamax :  int graph  -> id -> int -> id list -> int
+val capamax :  graphe  -> id -> int -> path -> int
 
-val get_inflow : int graph -> int -> int
+val get_max : graphe -> int -> int
 
-val iter : int -> int graph -> id -> path -> int graph
+val iter : int -> graphe -> id -> path -> graphe
 
-val ford_fulkerson : int graph -> id -> id -> int graph
+val ford_fulkerson : graphe -> id -> id -> graphe
