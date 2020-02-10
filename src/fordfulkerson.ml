@@ -105,7 +105,7 @@ let rec ford_fulkerson graph id1 id2=
   let _ = Printf.printf "Ford_Fulkerson \n%!" in
 
   match find_path graph [] id1 id2 with 
-  |None -> Printf.printf "Flow max du graphe : %d \n%!" (get_max graph id2); graph
+  |None -> Printf.printf "*****************Flow max du graphe : %d \n%! ********************" (get_max graph id2); graph
   |Some x -> ford_fulkerson (iter graph id1 x) id1 id2 ;
 
 ;;
