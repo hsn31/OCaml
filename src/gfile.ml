@@ -109,26 +109,27 @@ let export name graph =
 
   (*on crée une fonction intermédiaire pour écrire une ligne : *)
   let new_line id1 id2 lbl =
-   
-   (* https://graphviz.gitlab.io/_pages/Gallery/directed/fsm.gv.txt *)
-   fprintf writefile "\tLR_%i -> LR_%i [ label = \"%s\" ]; \n" id1 id2 v_str;
+
+    (* https://graphviz.gitlab.io/_pages/Gallery/directed/fsm.gv.txt *)
+    fprintf file "\tLR_%i -> LR_%i [ label = \"%s\" ]; \n" id1 id2 lbl;
     ()
   in
 
+  (* fun id1 id2 lbl -> fprintf file *)
   (*On écrit dans ce fichier *)
 
   (*https://www.tonyballantyne.com/graphs.html *)
-  
+
   fprintf file "digraph finite_state_machine {\n" ;
 
   fprintf file "\trankdir=LR; \n\tsize=\"8,5\"\n";
 
   fprintf file "\tnode [shape = circle]; \n";
 
-  e_iter graph (new_line);
+  e_iter graph (fun id1 id2 lbl -> new_line id1 id2 lbl);
 
   fprintf file "}\n";
 
   close_out file ;
   ()
-  ;;
+;;

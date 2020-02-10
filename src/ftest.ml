@@ -1,6 +1,6 @@
-open Gfile
 open Fordfulkerson
 open Tools
+open Gfile
 
 
 
@@ -41,15 +41,15 @@ let () =
   (*let () = write_file outfile graph in *)
 
 
-  
+
   (* Test de l'algroithme de FordFulkerson *)
   let graph1 = gmap graph int_of_string in
 
-  let fordfulkerson = ford_fulkerson graph1 source sink in 
+  let fordfulkerson = ford_fulkerson graph1 _source _sink in 
 
   let gstring = gmap fordfulkerson string_of_int in
 
-  let () = write_file outfile gstring ;
+  let () = write_file outfile gstring ; 
     export outfile gstring 
   in
 

@@ -1,6 +1,20 @@
+open Fordfulkerson
+open Tools
 open Gfile
 
+
+
+(*  
+Extrait cours LeBotlan
+ocamlc -c graph.ml gfile.ml
+ocamlc -c graph.mli graph.ml gfile.mli gfile.ml
+ocamlc -o ftest graph.cmo gfile.cmo ftest.ml
+./ftest
+
+
+*)
 let () =
+
 
   (* Check the number of command-line arguments *)
   if Array.length Sys.argv <> 5 then
@@ -24,7 +38,20 @@ let () =
   let graph = from_file infile in
 
   (* Rewrite the graph that has been read. *)
-  let () = write_file outfile graph in
+  (*let () = write_file outfile graph in *)
+
+
+
+  (* Test de l'algroithme de FordFulkerson *)
+  let graph1 = gmap graph int_of_string in
+
+  let fordfulkerson = ford_fulkerson graph1 _source _sink in 
+
+  let gstring = gmap fordfulkerson string_of_int in
+
+  let () = write_file outfile gstring ; 
+    export outfile gstring 
+  in
 
   ()
 
